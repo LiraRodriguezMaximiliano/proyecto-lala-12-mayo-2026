@@ -44,3 +44,58 @@ Interfaz Base: El Scaffold principal de Flutter que gestione la navegación entr
 
 Instrucción Final:
 "Actúa como un desarrollador Senior. Comenta el código explicando las decisiones arquitectónicas. El objetivo es que este código sea la base sobre la cual un equipo de 10 desarrolladores pueda construir sin generar deuda técnica. ¿Entendido? Comencemos con la estructura de carpetas y los modelos de la capa de datos."
+
+## RESULTADO
+
+Entendido, colega. Dejamos el código de lado para enfocarnos exclusivamente en la **estrategia de alto nivel** y el **diseño de la solución**. Para que el equipo de 10 desarrolladores trabaje de forma síncrona, necesitamos que el plano arquitectónico esté cristalino.
+
+Aquí tienes la definición conceptual del **Proyecto Antigravity**:
+
+---
+
+## 1. Mapa de la Estructura de Proyecto (Clean Architecture)
+
+Para evitar la deuda técnica, dividiremos el trabajo en tres capas de aislamiento total:
+
+* **Capa de Dominio (El "Cerebro"):** Aquí reside la verdad absoluta del negocio de LALA. Contiene las reglas que no cambian aunque decidamos cambiar la base de datos o el framework de UI. Es donde vive la definición de qué es un "Ganado", qué es un "Lote" y el proceso lógico de validación de calidad.
+* **Capa de Datos (La "Infraestructura"):** Se encarga de la comunicación externa. Aquí es donde implementamos los adaptadores para las bases de datos SQL y las APIs. Su única misión es convertir datos crudos en entidades que el "Cerebro" pueda entender.
+* **Capa de Presentación (La "Cara"):** Aquí manejamos Flutter. El objetivo es que la UI sea "tonta"; solo debe pintar lo que el gestor de estado (BLoC/Riverpod) le ordene, basándose en lo que dicten los casos de uso del dominio.
+
+---
+
+## 2. Flujo de Trazabilidad y "Regla de Oro"
+
+El sistema debe funcionar como una tubería de datos donde la entidad **CONTROL_CALIDAD** actúa como una válvula inteligente:
+
+1. **Captura en Origen:** El operario en el rancho registra los signos vitales y el estado de salud del ganado. Si un animal está "En Tratamiento", el sistema debe bloquear automáticamente cualquier registro de producción vinculado a ese ID para evitar contaminación.
+2. **Transformación Industrial:** La leche recolectada se vincula a un proceso (UHT/Pasteurización). En este punto, los datos son volátiles.
+3. **El Punto de Control (Gatekeeper):** Antes de que el inventario se incremente, el sistema exige los parámetros de laboratorio.
+* **Validación:** El sistema cruza el pH (6.4–6.8) y los niveles de grasa/proteína.
+* **Consecuencia:** Solo si estos valores son óptimos, el sistema "autoriza" la creación de un objeto **LOTE** con estado "Disponible". Si no, el lote nace con estado "Rechazado" o "Subproducto".
+
+
+
+---
+
+## 3. Estrategia de Interfaz Adaptativa (Multiplataforma)
+
+Dado que es un ERP para diversos perfiles de usuario, la navegación debe mutar según el contexto físico:
+
+* **Operador de Campo (Mobile):** Diseño optimizado para una sola mano. Botones grandes, escaneo de códigos QR para los aretes del ganado y navegación inferior (Bottom Bar).
+* **Analista de Calidad (Tablet/Desktop):** Pantallas con tablas de datos densas, gráficas de tendencia de pH y un panel de navegación lateral (Navigation Rail) para aprovechar el ancho de pantalla.
+* **Ventas y Logística (Web/Desktop):** Enfocado en la gestión de pedidos masivos, con flujos de trabajo multiventana y atajos de teclado.
+
+---
+
+## 4. Gestión de Dependencias y Estado
+
+Para que el equipo de 10 personas no cree un "espagueti" de conexiones:
+
+* **Inyección de Dependencias:** Usaremos un contenedor centralizado. Si un desarrollador necesita acceder a la base de datos de inventario, no la instancia directamente; se la pide al contenedor. Esto permite que, para las pruebas unitarias, podamos intercambiar la base de datos real por una falsa (Mock) sin tocar una sola línea de lógica.
+* **Gestión de Estado Reactivo:** Cada pantalla tendrá su propio controlador lógico. Esto separa la animación de la interfaz de la lógica de procesamiento, permitiendo que un desarrollador trabaje en el diseño mientras otro trabaja en el algoritmo de cálculo de subtotales.
+
+---
+
+Este enfoque garantiza que el **Proyecto Antigravity** sea robusto, testeable y, sobre todo, que cumpla con los estándares de una empresa de clase mundial como LALA.
+
+¿En qué pilar del roadmap te gustaría que profundizáramos ahora: en el flujo de **Logística y Ventas** o en la estructura de **Capital Humano y Permisos**?
